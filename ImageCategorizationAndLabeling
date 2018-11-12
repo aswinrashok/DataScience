@@ -1,0 +1,18 @@
+from fastai import *
+from fastai.vision import *
+%matplotlib inline
+
+#Download Dataset
+path=untar_data(URLs.CIFAR);path
+
+folder = 'bike'
+file = 'bike.txt'
+
+path = Path('data/Vehicle')
+dest = path/folder
+dest.mkdir(parents=True, exist_ok=True)
+
+download_images(path/file, dest, max_pics=200)
+
+cd nbs
+ls '/home/nbuser/courses/fast-ai/course-v3/nbs/data/Vehicle/'
