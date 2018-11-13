@@ -16,3 +16,24 @@ download_images(path/file, dest, max_pics=200)
 
 cd nbs
 ls '/home/nbuser/courses/fast-ai/course-v3/nbs/data/Vehicle/'
+classes = ['car','bike','Train']
+for c in classes:
+    print(c)
+    verify_images(path/c, delete=True, max_workers=8)
+np.random.seed(42)
+data = ImageDataBunch.from_folder(path, train=".", valid_pct=0.2,
+        ds_tfms=get_transforms(), size=224, num_workers=4).normalize(imagenet_stats)
+        
+ data.classes
+ data.show_batch(rows=3, figsize=(7,8))
+ data.classes, data.c, len(data.train_ds), len(data.valid_ds)
+ learn.save('stage-1')
+ learn.unfreeze()
+ learn.lr_find()
+ learn.recorder.plot()
+ 
+ learn.fit_one_cycle(2, max_lr=slice(1e-5,1e-4))
+ learn.save('stage-2')
+ interp = ClassificationInterpretation.from_learner(learn)
+ interp.plot_confusion_matrix()
+ interp.plot_top_losses(2)
